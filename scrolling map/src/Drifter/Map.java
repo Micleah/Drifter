@@ -1,8 +1,13 @@
 package Drifter;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 import java.awt.*;
 
 public class Map {
 
+<<<<<<< Updated upstream
     public static int[][] squarePositions = {{-200,-200},{200,200},{200,-200},{-200,200},
             {-350,200},{-200,350},{350,-200},{200,-350}};
 
@@ -47,6 +52,28 @@ public class Map {
                             centery-bigOlArray[i][j + 1][1]-(int)Player.playerY);
                 }
             }
+=======
+    public static int[][] rectanglePositions = {{-200,-200,100,100},{200,200,100,100},{200,-200,100,100},
+            {-200,200,100,100},{-350,200,100,100},{-200,350,100,100},{350,-200,100,100},{200,-350,100,100},
+            {-400,50,100,10},{-400,0,100,10}};
+
+    private static int centerx = Main.screenWidth / 2;
+    private static int centery = Main.screenHeight / 2;
+
+    public Map(){
+        for (int i = 0; i < rectanglePositions.length; i++) {
+            rectanglePositions[i][0] += centerx;
+            rectanglePositions[i][1] = centery - rectanglePositions[i][1];
+        }
+    }
+
+    public static void draw(Graphics g) {
+
+        g.setColor(Color.white);
+        for (int i = 0; i < rectanglePositions.length; i++) {
+            g.drawRect(rectanglePositions[i][0]-(int)Player.playerX, rectanglePositions[i][1]-(int)Player.playerY,
+                    rectanglePositions[i][2],rectanglePositions[i][3]);
+>>>>>>> Stashed changes
         }
     }
 }

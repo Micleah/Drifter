@@ -25,11 +25,22 @@ public class Player extends JComponent implements MouseMotionListener, MouseList
     static float playerXSpeed = 0.0f;
     static float playerYSpeed = 0.0f;
     float movementSpeed = 18.0f;
+<<<<<<< Updated upstream
     float friction = 0.4f;
 
     static double direction = 0;
+<<<<<<< Updated upstream
     static int[][] shipPositions = new int[2][8];
     static int size = 4;
+=======
+    static int[][] shipPositions = new int[4][2];
+=======
+    float friction = 1f;
+
+    static double direction = 0;
+    static int[][] shipPositions = new int[2][4];
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
     long thisTime;
     private long lastTime = System.nanoTime();
@@ -52,6 +63,7 @@ public class Player extends JComponent implements MouseMotionListener, MouseList
         } else {
             direction = Math.atan(correctedMouseY / correctedMouseX) + Math.PI;
         }
+<<<<<<< Updated upstream
         if (leftMousePressed) {
             if (shipphase > 0) {
                 shipphase -= 0.01;
@@ -95,13 +107,40 @@ public class Player extends JComponent implements MouseMotionListener, MouseList
             //left
         shipPositions[1][7] = (int)((4*size) * Math.sin(direction + Math.PI/2.9)) + centery;
         shipPositions[0][7] = (int)((4*size) * Math.cos(direction + Math.PI/2.9)) + centerx;
+=======
+<<<<<<< Updated upstream
+
+        shipPositions[0][0] = (int)(12 * Math.cos(direction)) + centerx;
+        shipPositions[0][1] = (int)(12 * Math.sin(direction)) + centery;
+        shipPositions[1][0] = (int)(6 * Math.cos(direction + Math.PI/2)) + centerx;
+        shipPositions[1][1] = (int)(6 * Math.sin(direction + Math.PI/2)) + centery;
+        shipPositions[2][0] = (int)(6 * Math.cos(direction + Math.PI)) + centerx;
+        shipPositions[2][1] = (int)(6 * Math.sin(direction + Math.PI)) + centery;
+        shipPositions[3][0] = (int)(6 * Math.cos(direction - Math.PI/2)) + centerx;
+        shipPositions[3][1] = (int)(6 * Math.sin(direction - Math.PI/2)) + centery;
+=======
+        int length = 16;
+        shipPositions[0][0] = (int)(length * Math.cos(direction)) + centerx;
+        shipPositions[1][0] = (int)(length * Math.sin(direction)) + centery;
+        shipPositions[0][1] = (int)(length/2 * Math.cos(direction + Math.PI/2)) + centerx;
+        shipPositions[1][1] = (int)(length/2 * Math.sin(direction + Math.PI/2)) + centery;
+        shipPositions[0][2] = (int)(length/2 * Math.cos(direction + Math.PI)) + centerx;
+        shipPositions[1][2] = (int)(length/2 * Math.sin(direction + Math.PI)) + centery;
+        shipPositions[0][3] = (int)(length/2 * Math.cos(direction - Math.PI/2)) + centerx;
+        shipPositions[1][3] = (int)(length/2 * Math.sin(direction - Math.PI/2)) + centery;
+
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     }
 
 
     public void playerMovement(){
         //Controls
         if (leftMousePressed == true) {
+<<<<<<< Updated upstream
             System.out.println(playerXSpeed);
+=======
+>>>>>>> Stashed changes
             correctedMouseX = mouseX - centerx;
             correctedMouseY = mouseY - centery;
             float magnitude = (float) Math.sqrt(correctedMouseX * correctedMouseX + correctedMouseY * correctedMouseY);
@@ -119,6 +158,39 @@ public class Player extends JComponent implements MouseMotionListener, MouseList
         playerXSpeed = playerXSpeed * (1.0f - (friction * deltaTime));
         playerYSpeed = playerYSpeed * (1.0f - (friction * deltaTime));
 
+<<<<<<< Updated upstream
+=======
+        //Map Collisions
+        Polygon shipPoly = new Polygon(shipPositions[0],shipPositions[1], shipPositions[0].length);
+
+        A: for(int i = 0; i < Map.rectanglePositions.length; i++) {
+
+            Rectangle mappyRect = new Rectangle(Map.rectanglePositions[i][0]-(int)playerX,
+                    Map.rectanglePositions[i][1]-(int)playerY,
+                    Map.rectanglePositions[i][2], Map.rectanglePositions[i][3]);
+
+            if (shipPoly.intersects(mappyRect)) {
+                if(centerx <= mappyRect.x || centerx >= mappyRect.x + mappyRect.width){
+                    if (mappyRect.x>centerx) {
+                        playerX--;
+                    } else if (mappyRect.x + mappyRect.width<centerx) {
+                        playerX++;
+                    }
+                    playerX -= playerXSpeed*deltaTime;
+                    playerXSpeed = -playerXSpeed/2;
+                } else {
+                    if (mappyRect.y>centery) {
+                        playerY--;
+                    } else if (mappyRect.y + mappyRect.height<centery) {
+                        playerY++;
+                    }
+                    playerY -= playerYSpeed*deltaTime;
+                    playerYSpeed = -playerYSpeed/2;
+                }
+                break A;
+            }
+        }
+>>>>>>> Stashed changes
     }
 
     public void timeStuff(){
@@ -132,6 +204,7 @@ public class Player extends JComponent implements MouseMotionListener, MouseList
         int currenty = shipPositions[1][4];
         ship();
         g.setColor(Color.green);
+<<<<<<< Updated upstream
         ((Graphics2D)g).setStroke(new BasicStroke(1));
         g.drawPolygon(shipPositions[0], shipPositions[1], shipPositions[0].length);
         g.setColor(Color.getHSBColor(shipphase,1,0.75f));
@@ -154,6 +227,18 @@ public class Player extends JComponent implements MouseMotionListener, MouseList
             int bubbleSize = 20;
             g.fillOval(currentx-5, currenty-5, bubbleSize, bubbleSize);
         }
+=======
+<<<<<<< Updated upstream
+        ((Graphics2D)g).setStroke(new BasicStroke(3));
+        g.drawLine(shipPositions[0][0], shipPositions[0][1], shipPositions[1][0], shipPositions[1][1]);
+        g.drawLine(shipPositions[1][0], shipPositions[1][1], shipPositions[2][0], shipPositions[2][1]);
+        g.drawLine(shipPositions[2][0], shipPositions[2][1], shipPositions[3][0], shipPositions[3][1]);
+        g.drawLine(shipPositions[3][0], shipPositions[3][1], shipPositions[0][0], shipPositions[0][1]);
+=======
+        ((Graphics2D)g).setStroke(new BasicStroke(2));
+        g.drawPolygon(shipPositions[0],shipPositions[1],shipPositions[0].length);
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     }
 
     @Override
