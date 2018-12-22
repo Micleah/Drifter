@@ -4,10 +4,10 @@ import javax.swing.*;
 
 public class Main {
 
-    public static int screenWidth = 1200;
-    public static int screenHeight = 700;
+    static int screenWidth = 1200;
+    static int screenHeight = 700;
 
-    public static JFrame window = new JFrame();
+    static JFrame window = new JFrame();
 
     public static void main(String[] args) {
 

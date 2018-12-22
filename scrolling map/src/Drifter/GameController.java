@@ -4,17 +4,17 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class GameController extends JPanel implements KeyListener, ActionListener{
-    Timer timer;
-    Graphics g;
-    private Map map;
+    private Timer timer;
     private Player player;
 
-    public GameController(){
+    GameController(){
 
         player = new Player();
         Main.window.add(player);
 
-        map = new Map();
+        Map map = new Map();
+
+        Wormholes wormholes = new Wormholes();
 
         addKeyListener(this);
         setFocusable(true);
@@ -37,6 +37,8 @@ public class GameController extends JPanel implements KeyListener, ActionListene
 
         Map.draw(g);
 
+        Wormholes.draw(g);
+
         Player.draw(g);
 
         g.dispose();
@@ -48,22 +50,19 @@ public class GameController extends JPanel implements KeyListener, ActionListene
         timer.start();
         player.timeStuff();
         player.playerMovement();
+        Player.ship();
+        Wormholes.createWormholePoints();
+        Wormholes.moveWormholes();
 
         repaint();
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
+    public void keyTyped(KeyEvent e) {}
 
     @Override
-    public void keyPressed(KeyEvent e) {
-
-    }
+    public void keyPressed(KeyEvent e) {}
 
     @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
+    public void keyReleased(KeyEvent e) {}
 }
